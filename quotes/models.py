@@ -6,6 +6,7 @@ class Author(models.Model):
 	
 	def __unicode__(self):
 		return self.author_name
+		
 
 class Quote(models.Model):
 	quote_text = models.CharField(max_length=300)

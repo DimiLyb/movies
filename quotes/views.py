@@ -9,19 +9,24 @@ from .models import Quote
 import redis
 import json
 
+def json_update(str):
+     j = urllib2.urlopen('http://www.omdbapi.com/?t=bond&y=&plot=short&r=json')
+     j_obj = json.load(j)
+     for jo in j_obj: 
+          print (jo['Title'])
+     return
+     
+     json_update()
+
 class IndexView(generic.ListView):
     template_name = 'quotes/index.html'
     context_object_name = 'author_list'
+    
 
     def get_queryset(self):
         return Author.objects.order_by('author_name')
         
-    def json_update(request):
-     j = urllib2.urlopen('http://www.omdbapi.com/?t=bond&y=&plot=short&r=json')
-     j_obj = json.load(j)
-     for jo in j_obj: 
-          print jo['Title']
-     return HttpResponse(jo['title'])
+    
 
 class DetailView(generic.DetailView):
 	model = Quote
